@@ -16,7 +16,7 @@ namespace Adressbok2
             public int PhoneNumber { get; set; }
             public string Email { get; set; }
 
-
+            
 
 
             static void Main(string[] args)
@@ -61,7 +61,7 @@ namespace Adressbok2
                         Console.WriteLine("Skriv nu in din email!");
                         emailInput = Console.ReadLine();
                         Console.Clear();
-                        
+
 
 
 
@@ -82,38 +82,55 @@ namespace Adressbok2
                             Email = emailInput
                         });
 
-                        
-                            using (System.IO.StreamWriter file = new System.IO.StreamWriter(@"C:\\Users\\ÄGARE\\Desktop\\AdressBok.txt", true))
+
+                        using (System.IO.StreamWriter file = new System.IO.StreamWriter(@"C:\\Users\\ÄGARE\\Desktop\\AdressBok.txt", true))
                         {
-                            foreach (var Person in myPeople)
+                            foreach (var Person in myPeople) 
                             {
-                                file.WriteLine(Person.Name);
+                                
+                                file.WriteLine(Person.Name);        
                                 file.WriteLine(Person.Adress);
-                                file.WriteLine(Person.PhoneNumber);
+                                file.WriteLine(Person.PhoneNumber); 
                                 file.WriteLine(Person.Email);
+                                file.WriteLine("************************");
                             }
-                        }
-
-                        
-
-
-
-                        if (command == "2")
-                        {
-
-                            
-                            //   foreach (var Person in myPeople)
-                            //   {
-
-                            //    Console.WriteLine(Person.Name);
-                            //  Console.WriteLine(Person.Adress);
-                            //   Console.WriteLine(Person.PhoneNumber);
-                            //  Console.WriteLine(Person.Email);
-                            //  Console.WriteLine("********************");
                         }
 
 
                     }
+
+
+                    if (command == "2")
+                    {
+                        string readText = (File.ReadAllText(fileName));
+                        Console.WriteLine(readText);
+
+                    }
+
+                    else if (command == "3") 
+                    {
+                        int deleteindex;
+                        File.WriteAllText(fileName, String.Empty);
+                        Console.WriteLine("Vilket index vill du ta bort?");
+                        
+                        deleteindex = int.Parse(Console.ReadLine());
+
+                        myPeople.RemoveAt(deleteindex);
+                        using (System.IO.StreamWriter file = new System.IO.StreamWriter(@"C:\\Users\\ÄGARE\\Desktop\\AdressBok.txt", true))
+                        {
+                            foreach (var Person in myPeople)
+                            {
+
+                                file.WriteLine(Person.Name);
+                                file.WriteLine(Person.Adress);
+                                file.WriteLine(Person.PhoneNumber);
+                                file.WriteLine(Person.Email);
+                                file.WriteLine("************************");
+                            }
+                        }
+
+                    }
+                    
 
 
                 } while (command != "Avsluta");
