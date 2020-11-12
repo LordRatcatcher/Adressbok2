@@ -25,7 +25,7 @@ namespace Adressbok2
 
 
                 string command;
-                List<Person> linnen = new List<Person>();
+                
                 List<Person> myPeople = new List<Person>();
                 do
                 {
@@ -39,15 +39,15 @@ namespace Adressbok2
                     if (command == "1")
                     {
 
-
+                        //declring strings/ints
                         string nameInput;
                         string adressInput;
                         string telephoneInput;
                         string emailInput;
                         int telephoneInputNumber;
-                        int telephoneToString;
+                        
 
-
+                        //reading input to put into class
                         Console.WriteLine("Hej hopp skriv in ditt namn!");
                         nameInput = Console.ReadLine();
                         Console.Clear();
@@ -61,11 +61,7 @@ namespace Adressbok2
                         Console.WriteLine("Skriv nu in din email!");
                         emailInput = Console.ReadLine();
                         Console.Clear();
-
-
-
-
-
+                        //adding my new person in the list
                         myPeople.Add(new Person()
                         {
                             Name = nameInput,
@@ -73,20 +69,11 @@ namespace Adressbok2
                             PhoneNumber = telephoneInputNumber,
                             Email = emailInput
                         });
-
-                        linnen.Add(new Person()
-                        {
-                            Name = nameInput,
-                            Adress = adressInput,
-                            PhoneNumber = telephoneInputNumber,
-                            Email = emailInput
-                        });
-
-
+                      //writing every class to textfile
                         using (System.IO.StreamWriter file = new System.IO.StreamWriter(@"C:\\Users\\ÄGARE\\Desktop\\AdressBok.txt", true))
                         {
                             foreach (var Person in myPeople) 
-                            {
+                        {
                                 
                                 file.WriteLine(Person.Name);        
                                 file.WriteLine(Person.Adress);
@@ -98,7 +85,7 @@ namespace Adressbok2
 
 
                     }
-
+                    //read textfile and display the information
 
                     if (command == "2")
                     {
@@ -109,12 +96,13 @@ namespace Adressbok2
 
                     else if (command == "3") 
                     {
+                        //clearing the file, asking for index to remove
                         int deleteindex;
                         File.WriteAllText(fileName, String.Empty);
                         Console.WriteLine("Vilket index vill du ta bort?");
-                        
+                        //removing the object at specified index
                         deleteindex = int.Parse(Console.ReadLine());
-
+                        //rewriting to the empty file 
                         myPeople.RemoveAt(deleteindex);
                         using (System.IO.StreamWriter file = new System.IO.StreamWriter(@"C:\\Users\\ÄGARE\\Desktop\\AdressBok.txt", true))
                         {
